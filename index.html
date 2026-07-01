@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>邹亚蒙游戏策划作品集 | Chairen Game Designer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== 全局 & 变量 ===== */
+    :root {
+      --bg: #f8f6f1;
+      --surface: #ffffff;
+      --surface2: #f2efea;
+      --primary: #4a3f8f;      /* 深紫 - 主色 */
+      --primary-light: #ede9fb; /* 浅紫背景 */
+      --accent: #d85a30;       /* 珊瑚橙 - 强调 */
+      --accent-light: #faeee7;
+      --text: #1e1b2e;
+      --text-muted: #6b6880;
+      --border: rgba(74,63,143,0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --pixel-font: 'Press Start 2P', monospace;
+      --body-font: 'Noto Sans SC', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--body-font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ===== 像素风装饰条 ===== */
+    .pixel-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--primary) 0px, var(--primary) 12px,
+        var(--accent) 12px, var(--accent) 24px,
+        #7f77dd 24px, #7f77dd 36px,
+        #ef9f27 36px, #ef9f27 48px
+      );
+    }
+
+    /* ===== 导航 ===== */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: var(--pixel-font);
+      font-size: 11px;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    /* ===== Hero 区 ===== */
+    .hero {
+      padding: 80px 5% 72px;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-avatar {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      border: 3px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 像素风头像占位（替换成真实图片时删掉这段） */
+    .hero-avatar::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 80px;
+      background: var(--primary);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      clip-path: polygon(
+        30% 0%, 70% 0%, 100% 30%, 100% 70%,
+        70% 100%, 30% 100%, 0% 70%, 0% 30%
+      );
+    }
+
+    .hero-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-family: var(--body-font);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-content h1 .en-name {
+      font-family: var(--pixel-font);
+      font-size: 11px;
+      font-weight: 400;
+      display: block;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-content .subtitle {
+      font-size: 15px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+
+    /* ===== 区块通用 ===== */
+    section {
+      padding: 64px 5%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .section-tag {
+      font-family: var(--pixel-font);
+      font-size: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ===== 作品卡片网格 ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(74,63,143,0.1);
+    }
+
+    /* 图片容器 */
+    .card-media {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--primary-light);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 图片占位（没有图片时显示） */
+    .card-media-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      font-family: var(--pixel-font);
+      font-size: 9px;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+    }
+
+    .card-type-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255,255,255,0.9);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      backdrop-filter: none;
+    }
+
+    .card-body {
+      padding: 20px 22px 22px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--surface2);
+      color: var(--text-muted);
+    }
+
+    .tag-accent {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-link {
+      font-size: 12px;
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .card-link:hover {
+      background: var(--primary-light);
+    }
+
+    /* ===== 视频区 ===== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+      gap: 24px;
+    }
+
+    .video-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #0d0b1a;
+    }
+
+    /* 本地视频 */
+    .video-wrapper video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* 嵌入 iframe（B站/YouTube） */
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .video-info {
+      padding: 16px 20px 20px;
+    }
+
+    .video-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .video-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== 技能区 ===== */
+    .skills-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .skill-group-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-group-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-pill {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ===== 联系区 ===== */
+    .contact-wrap {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .contact-text h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .contact-text p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ===== 页脚 ===== */
+    footer {
+      text-align: center;
+      padding: 28px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+
+    footer .pixel-sig {
+      font-family: var(--pixel-font);
+      font-size: 7px;
+      color: var(--primary);
+      display: block;
+      margin-top: 6px;
+    }
+
+    /* ===== 分割线 ===== */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 700px) {
+      .hero { flex-direction: column; text-align: center; gap: 2rem; }
+      .hero-links { justify-content: center; }
+      .video-grid { grid-template-columns: 1fr; }
+      .contact-wrap { flex-direction: column; }
+    }
+
+    /* ===== 平滑滚动 ===== */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body>
+
+<div class="pixel-bar"></div>
+
+<!-- ===== 导航 ===== -->
+<nav>
+  <span class="nav-logo">CHAIREN:&nbsp;GAME&nbsp;DESIGNER</span>
+  <ul class="nav-links">
+    <li><a href="#projects">作品</a></li>
+    <li><a href="#videos">视频</a></li>
+    <li><a href="#skills">技能</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-avatar">
+    <!--
+      【替换头像】
+      1. 把你的头像图片放到 portfolio 文件夹内（例如 avatar.jpg）
+      2. 取消下面这行的注释，并修改文件名
+    -->
+    <img src="touxiang.jpg" alt="头像" /> 
+  </div>
+  <div class="hero-content">
+    <!--【修改】把下面的名字换成你的-->
+    <h1>邹亚蒙<span class="en-name">Chairen</span></h1>
+    <p class="subtitle">游戏策划 · Game Designer</p>
+    <p>
+      <!--【修改】一段自我介绍，100字左右，写你的游戏方向和设计理念-->
+      热衷于游戏玩法机制的探索与分析,
+      专注于学院派研究兼以感性派实践,
+      致力于创造”轻松上手、难以精通“的游戏体验。
+    </p>
+    <div class="hero-links">
+      <!--【修改】替换链接 href 为你真实的地址-->
+      <a href="mailto:1579136898@qq.com" class="btn btn-primary">📬 联系我</a>
+      <a href="#projects" class="btn btn-outline">查看作品</a>
+      <!--【可选】如有简历 PDF，取消注释并改文件名-->
+      <!--<a href="resume.pdf" target="_blank" class="btn btn-outline">📄 简历下载</a>-->
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 作品展示 ===== -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-tag">PROJECTS</span>
+    <h2 class="section-title">游戏作品</h2>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- ====== 作品卡片 1 ====== -->
+    <div class="project-card">
+      <div class="card-media">
+        <!--
+          【放图片】把截图/封面图放入 portfolio 文件夹
+          然后把下面注释取消掉，改成你的文件名
+        -->
+        <img src="swift.png" alt="项目截图" /> 
+        <div class="card-media-placeholder">SCREENSHOT</div>
+        <span class="card-type-badge">PC / Unity</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <!--【修改】换成你项目的标签-->
+          <span class="tag tag-accent">横板2D</span>
+          <span class="tag">关卡设计</span>
+          <span class="tag">玩法创新</span>
+        </div>
+        <!--【修改】项目名-->
+        <h3 class="card-title">雨燕 Swift</h3>
+        <!--【修改】项目描述-->
+        <p class="card-desc">
+          玩法融合的一次尝试，致敬了《Flappy Bird》和《是男人就下一百层》。Unity引擎开发，纯手搓代码。
+        </p>
+        <div class="card-links">
+          <!--【修改】填写真实链接，没有就删掉对应行-->
+          <a href="#videos" class="card-link" >🎬 演示视频</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 作品卡片 2 ====== -->
+    <div class="project-card">
+      <div class="card-media">
+        <img src="yeyaji.png" alt="项目截图" /> -
+        <div class="card-media-placeholder">SCREENSHOT</div>
+        <span class="card-type-badge">PC / Unity+AI</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag tag-accent">休闲游戏</span>
+          <span class="tag">像素解压</span>
+        </div>
+        <h3 class="card-title">只剩液压机 OnlyHydraulicPress</h3>
+        <p class="card-desc">
+          <!--【修改】描述这个作品-->
+          AI开发的一次尝试，像素美术来自GPT-image2，代码来自Codex，Unity操作来自我。玩法灵感来源于短视频平台上的液压机解压视频。
+        </p>
+        <div class="card-links">
+          <a href="#videos" class="card-link" >🎬 演示视频</a>
+          <a href="https://cha1ren.itch.io/only-hydraulic-press" class="card-link" target="_blank">🔗 下载DEMO</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 作品卡片 3（可复制更多） ====== -->
+    <div class="project-card">
+      <div class="card-media">
+        <img src="luoke.png" alt="项目截图" /> 
+        <div class="card-media-placeholder">SCREENSHOT</div>
+        <span class="card-type-badge">HTML</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag tag-accent">二创游戏</span>
+          <span class="tag">休闲解压</span>
+        </div>
+        <h3 class="card-title">洛克精灵杂交融合器 Rocokingdom-elf-hybrid</h3>
+        <p class="card-desc">
+          洛克王国世界的二创游戏网站，网站发布日均浏览量破千，B站相关视频播放量破万。
+        </p>
+        <div class="card-links">
+          <a href="#videos" class="card-link" >🎬 演示视频</a>
+          <a href="https://rocokingdom-elf-hybrid.pages.dev/" class="card-link" target="_blank">🔗 网站链接</a>
+        </div>
+      </div>
+    </div>
+
+        <!-- ====== 作品卡片 4（可复制更多） ====== -->
+    <div class="project-card">
+      <div class="card-media">
+        <img src="sheji.png" alt="项目截图" /> 
+        <div class="card-media-placeholder">SCREENSHOT</div>
+        <span class="card-type-badge">PC / Unity</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag tag-accent">射击</span>
+          <span class="tag">Roguelike</span>
+          <span class="tag">枪械设计</span>
+          <span class="tag">敌人设计</span>
+        </div>
+        <h3 class="card-title">西部废土 Westland</h3>
+        <p class="card-desc">
+          2D俯视角射击游戏，汲取了CS和VALORANT的射击逻辑和枪械手感，在2D平台上进行呈现。
+        </p>
+        <div class="card-links">
+          <a href="#videos" class="card-link" >🎬 演示视频</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 视频展示 ===== -->
+<section id="videos">
+  <div class="section-header">
+    <span class="section-tag">VIDEOS</span>
+    <h2 class="section-title">游戏演示</h2>
+  </div>
+
+  <div class="video-grid">
+
+    <!-- ====== 视频 1：本地视频文件 ====== -->
+    <div class="video-card">
+      <div class="video-wrapper">
+        <!--
+          【放本地视频】
+          把 .mp4 视频文件放入 portfolio 文件夹，改文件名即可
+        -->
+        <video controls poster="">
+          <source src="swiftdemo.mp4" type="video/mp4" />
+          您的浏览器不支持 HTML5 视频。
+        </video>
+      </div>
+      <div class="video-info">
+        <p class="video-title">雨燕 Swift</p>
+        <p class="video-desc">雨燕 Swift的demo新手教程关卡演示。</p>
+      </div>
+    </div>
+       <!-- ====== 视频 2：本地视频文件 ====== -->
+    <div class="video-card">
+      <div class="video-wrapper">
+        <!--
+          【放本地视频】
+          把 .mp4 视频文件放入 portfolio 文件夹，改文件名即可
+        -->
+        <video controls poster="">
+          <source src="yeyajidemo.mp4" type="video/mp4" />
+          您的浏览器不支持 HTML5 视频。
+        </video>
+      </div>
+      <div class="video-info">
+        <p class="video-title">只剩液压机 OnlyHydraulicPress</p>
+        <p class="video-desc">只剩液压机 OnlyHydraulicPress的游戏演示。</p>
+      </div>
+    </div>
+
+    <!-- ====== 视频 3：B站嵌入 ====== -->
+    <div class="video-card">
+      <div class="video-wrapper">
+        <!--
+          【嵌入B站视频】
+          1. 打开B站视频页面
+          2. 点"分享" → "嵌入代码"
+          3. 把 src="https://player.bilibili.com/player.html?bvid=XXXXX" 中的 XXXXX 换成你的 BV号
+        -->
+        <iframe
+          src="https://player.bilibili.com/player.html?bvid=BV1qmRQBCEnv&page=1&high_quality=1"
+          scrolling="no"
+          allowfullscreen="true"
+          title="B站演示视频"
+        ></iframe>
+      </div>
+      <div class="video-info">
+        <p class="video-title">洛克精灵杂交融合器 Rocokingdom-elf-hybrid</p>
+        <p class="video-desc">洛克精灵杂交融合器的Bilibili相关视频。</p>
+      </div>
+    </div>
+      <!-- ====== 视频 4：本地视频文件 ====== -->
+    <div class="video-card">
+      <div class="video-wrapper">
+        <!--
+          【放本地视频】
+          把 .mp4 视频文件放入 portfolio 文件夹，改文件名即可
+        -->
+        <video controls poster="">
+          <source src="qiangzhan.mp4" type="video/mp4" />
+          您的浏览器不支持 HTML5 视频。
+        </video>
+      </div>
+      <div class="video-info">
+        <p class="video-title">西部废土 Westland</p>
+        <p class="video-desc">西部废土 Westland的枪械演示。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 技能 ===== -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-tag">SKILLS</span>
+    <h2 class="section-title">专业技能</h2>
+  </div>
+
+  <div class="skills-wrap">
+
+    <div class="skill-group">
+      <p class="skill-group-title">策划 & 设计</p>
+      <div class="skill-list">
+        <!--【修改】换成你真实掌握的技能-->
+        <span class="skill-pill">系统设计</span>
+        <span class="skill-pill">玩法机制创新</span>
+        <span class="skill-pill">关卡设计</span>
+        <span class="skill-pill">手感优化</span>
+        <span class="skill-pill">数值调试</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <p class="skill-group-title">工具 & 技术</p>
+      <div class="skill-list">
+        <span class="skill-pill">Unity</span>
+        <span class="skill-pill">C# 基础</span>
+        <span class="skill-pill">墨刀</span>
+        <span class="skill-pill">Xmind</span>
+        <span class="skill-pill">Photoshop</span>
+        <span class="skill-pill">前沿AI工具</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <p class="skill-group-title">文档 & 协作</p>
+      <div class="skill-list">
+        <span class="skill-pill">配置表</span>
+        <span class="skill-pill">策划文档</span>
+        <span class="skill-pill">拆解案</span>
+        <span class="skill-pill">原型图</span>
+        <span class="skill-pill">Git</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 联系 ===== -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-text">
+      <h3>合作 & 求职</h3>
+      <!--【修改】这里写联系方式说明-->
+      <p>正在寻找游戏策划职位，欢迎工作室 / 团队联系。</p>
+    </div>
+    <div class="contact-links">
+      <!--【修改】换成你真实的联系方式链接-->
+      <a href="mailto:1579136898@qq.com" class="btn btn-primary">✉️ 发邮件</a>
+      <a href="https://cha1ren.itch.io/" target="_blank" class="btn btn-outline">itch.io</a>
+      <a href="https://space.bilibili.com/439107098?spm_id_from=333.1007.0.0" target="_blank" class="btn btn-outline">Bilibili</a>
+      <!--<a href="https://linkedin.com/in/yourname" target="_blank" class="btn btn-outline">LinkedIn</a>-->
+    </div>
+  </div>
+</section>
+
+<footer>
+  <!--【修改】换成你的名字 & 年份-->
+  © 2026 Zouyameng · Game Designer
+  <span class="pixel-sig">PROD BY CHAIREN</span>
+</footer>
+
+</body>
+</html>
